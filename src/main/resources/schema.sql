@@ -52,7 +52,7 @@ create table editorial
     id          serial
         constraint editorial_pk
             primary key,
-    name        varchar not zxnull,
+    name        varchar not null,
     nationality varchar not null,
     manga       integer
         constraint editorial_manga_id_fk
