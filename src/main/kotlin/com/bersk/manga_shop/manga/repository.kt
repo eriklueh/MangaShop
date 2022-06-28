@@ -1,20 +1,11 @@
-package com.bersk.manga_shop.manga_collection.manga
+package com.bersk.manga_shop.manga
 
+import com.bersk.manga_shop.Manga
+import com.bersk.manga_shop.MangaEntity
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.reactive.ReactiveSortingRepository
 import org.springframework.data.rest.core.annotation.RepositoryRestResource
 import reactor.core.publisher.Flux
-
-@RepositoryRestResource
-interface AuthorRepository : ReactiveSortingRepository<Author, Long>
-
-@RepositoryRestResource
-interface VolumeRepository : ReactiveSortingRepository<Volume, Long>{
-    fun findByManga(manga : Long): Flux<Volume>
-}
-
-@RepositoryRestResource
-interface EditorialRepository : ReactiveSortingRepository<Editorial, Long>
 
 @RepositoryRestResource
 interface MangaRepository : ReactiveSortingRepository<MangaEntity, Long> {
@@ -24,7 +15,8 @@ interface MangaRepository : ReactiveSortingRepository<MangaEntity, Long> {
         a.nationality as author_nationality, e.id as editorial_id, e.nationality as editorial_nationality, e.name as editorial_name
         from manga m
         inner join author a on a.id = m.author
-        inner join editorial e on m.id = e.manga
-         """)
+        inner join editorial e on m.editorial = e.id
+         """
+    )
     fun retrieveAllManga(): Flux<Manga>
 }

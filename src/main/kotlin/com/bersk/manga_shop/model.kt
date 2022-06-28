@@ -1,4 +1,4 @@
-package com.bersk.manga_shop.manga_collection.manga
+package com.bersk.manga_shop
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
@@ -13,12 +13,16 @@ data class MangaEntity(
     val editorial: Long
 ) {
     companion object {
-        fun from(manga: Manga): MangaEntity = MangaEntity(
-            title = manga.title,
-            author = manga.author.id,
-            genre = manga.genre,
-            editorial = manga.editorial.id
-        )
+        fun from(manga: Manga): MangaEntity {
+            //Fixme: Fixme chancho!
+            if (manga.author.id == null || manga.editorial.id == null) throw java.lang.IllegalArgumentException("La cagaste tio!")
+            return MangaEntity(
+                title = manga.title,
+                author = manga.author.id,
+                genre = manga.genre,
+                editorial = manga.editorial.id
+            )
+        }
     }
 }
 
@@ -44,18 +48,17 @@ data class Manga(
 
 data class Editorial(
     @Id
-    val id: Long,
+    val id: Long? = null,
     val name: String,
     val nationality: String,
-    val manga: Int
 )
 
 data class Volume(
     @Id
-    val id: Long,
+    val id: Long? = null,
     val publishingDate: String,
     val number: Int,
-    val manga: Int,
+    val manga: Long = -1,
     val firstChapter: Int,
     val lastChapter: Int
 )
@@ -63,7 +66,7 @@ data class Volume(
 @Table("author")
 data class Author(
     @Id
-    val id: Long = 0,
+    val id: Long? = null,
     val name: String,
     val lastName: String,
     val birthDate: String,

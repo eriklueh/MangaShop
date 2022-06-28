@@ -1,21 +1,41 @@
 package com.bersk.manga_shop
 
-import com.bersk.manga_shop.manga_collection.manga.Author
-import com.bersk.manga_shop.manga_collection.manga.AuthorRepository
+import io.vavr.control.Either
+import io.vavr.control.Option
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
 import reactor.core.publisher.Mono
 
 
 fun toDouble(i: Int): Mono<Double> = Mono.just(i.toDouble())
 
-@SpringBootTest
-class MangaShopApplicationTests(val authorRepository: AuthorRepository) {
+//@SpringBootTest
+class MangaShopApplicationTests() {
 
     @Test
     fun test1() {
-        authorRepository.save(Author(1, "Gege", "Akutami", "tal", "ta", "japo"))
+        val data: Double? = null
+        divide(1.0, 0.0)
+            .fold(
+                { e: Throwable -> println(e.message) },
+                { r: Double -> println(r) }
+            )
     }
+
+    fun divide(a: Double, b: Double): Either<Throwable, Double> {
+        return try {
+            Either.right(a.div(b))
+        } catch (e: java.lang.Exception) {
+            Either.left(e)
+        }
+    }
+
+    fun functionReceivingNullable(data: Int?) = Option.of(data)
+        .map {
+            it!! + 1
+        }.getOrElse {
+            0
+        }
+
 
 /*   @Test
    fun contextLoads() {
@@ -41,7 +61,7 @@ class MangaShopApplicationTests(val authorRepository: AuthorRepository) {
                println(it.message)
            }
            .subscribe { println(it) }*/
-   }
+}
 
 
 

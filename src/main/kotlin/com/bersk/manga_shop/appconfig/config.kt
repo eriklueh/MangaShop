@@ -1,8 +1,8 @@
 package com.bersk.manga_shop.appconfig
 
-import com.bersk.manga_shop.manga_collection.manga.Author
-import com.bersk.manga_shop.manga_collection.manga.Editorial
-import com.bersk.manga_shop.manga_collection.manga.Manga
+import com.bersk.manga_shop.Author
+import com.bersk.manga_shop.Editorial
+import com.bersk.manga_shop.Manga
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.r2dbc.spi.ConnectionFactory
 import io.r2dbc.spi.Row
@@ -25,8 +25,7 @@ class MangaReadConverter : Converter<Row, Manga> {
         val editorialNationality = source.get("editorial_nationality", String::class.java).toString()
         val editorialId: Int? = source.get("editorial_id") as Int?
         val editorialName = source.get("editorial_name").toString()
-        val editorialManga = source.get("editorial_Manga")as Int
-        val editorial = Editorial(editorialId?.toLong() ?: 0, editorialName, editorialNationality, editorialManga)
+        val editorial = Editorial(editorialId?.toLong() ?: 0, editorialName, editorialNationality)
 
         val title: String = source.get("title", String::class.java).toString()
         val genre = source.get("genre", String::class.java).toString()

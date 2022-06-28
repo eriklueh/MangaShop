@@ -28,6 +28,7 @@ dependencies {
     implementation("org.springframework.data:spring-data-rest-hal-explorer")
     implementation("org.postgresql:postgresql")
     implementation("org.postgresql:r2dbc-postgresql")
+    implementation("io.vavr:vavr:0.10.4")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
 }

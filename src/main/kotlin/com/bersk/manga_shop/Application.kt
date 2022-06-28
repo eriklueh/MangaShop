@@ -5,9 +5,9 @@ import org.springframework.boot.runApplication
 
 
 @SpringBootApplication
-class MangaShopApplication
+class Application
 
 
 fun main(args: Array<String>) {
-    runApplication<MangaShopApplication>(*args)
+    runApplication<Application>(*args)
 }
