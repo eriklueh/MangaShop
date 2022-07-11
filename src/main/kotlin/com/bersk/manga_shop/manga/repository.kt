@@ -4,10 +4,8 @@ import com.bersk.manga_shop.Manga
 import com.bersk.manga_shop.MangaEntity
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.reactive.ReactiveSortingRepository
-import org.springframework.data.rest.core.annotation.RepositoryRestResource
 import reactor.core.publisher.Flux
 
-@RepositoryRestResource
 interface MangaRepository : ReactiveSortingRepository<MangaEntity, Long> {
     @Query(
         """
@@ -19,4 +17,5 @@ interface MangaRepository : ReactiveSortingRepository<MangaEntity, Long> {
          """
     )
     fun retrieveAllManga(): Flux<Manga>
+    fun findByTitle(name: String?): Flux<MangaEntity>
 }

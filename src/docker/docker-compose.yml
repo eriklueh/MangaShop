@@ -3,12 +3,14 @@ volumes:
 
 services:
   postgres:
-    image: postgres:latest
-    environment:
-      - POSTGRES_PASSWORD=passwd
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=manga
+    image: mangapostgres
     ports:
       - 5432:5432
     volumes:
       - data:/var/lib/postgresql
+  manga-collectionl:
+    image: manga_collection
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres

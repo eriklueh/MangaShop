@@ -1,5 +1,7 @@
 create database manga;
 
+\c manga
+
 create table author
 (
     id          serial

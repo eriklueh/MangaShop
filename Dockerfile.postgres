@@ -1,0 +1,6 @@
+FROM postgres
+
+COPY src/main/resources/schema.sql /docker-entrypoint-initdb.d/1.schema.sql
+COPY src/main/resources/data.sql /docker-entrypoint-initdb.d/2.data.sql
+
+ENV POSTGRES_PASSWORD passwd
